@@ -32,4 +32,11 @@ Route::apiResource('v1/appointments', APC1::class)
 Route::post('login', [\App\Http\Controllers\Api\LoginController::class, 'login']);
 
 
-// Route::post('login', 'App\Http\Controllers\Api\LoginController@login'); Esta es otra forma de colocar rutas segun convenciones, ligeramente diferente.
+// Esta sera nuestra ruta de registro de usuarios.
+
+Route::post('register', [\App\Http\Controllers\Api\RegisterController::class, 'register']);
+
+
+// Ruta para el cierre de sesion, esta si se encuentra protegida, puesto que solo los usuarios con una sesion valida deben poder visualizar esta ruta.
+
+Route::middleware('auth:sanctum') -> post ('logout', [\App\Http\Controllers\Api\LoginController::class, 'logout']);

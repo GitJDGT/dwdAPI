@@ -27,6 +27,7 @@ class LoginController extends Controller
         {
             return response() -> json([
                 'token' => $request -> user() -> createToken($request -> name) -> plainTextToken,
+                'user_id' => $request -> user() -> id,
                 'message' => 'Login Success'
             ]);
         }
@@ -48,6 +49,17 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required',
             'name' => 'required'
+        ]);
+    }
+
+    // Esta funcion cierra la sesion del usuario que se encuentra "Logeado" y elimina el token de la misma.
+
+    public function logout(Request $request)
+    {
+        $request -> user() -> tokens() -> delete();
+
+        return response() -> json([
+            'message' => 'Logged out successfully'
         ]);
     }
 
