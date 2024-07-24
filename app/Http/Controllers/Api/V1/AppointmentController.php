@@ -20,12 +20,17 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        // Este codigo puede ser utilizado para traer una coleccion de recursos mediante el uso del formato del recurso individual
-        // y el metodo COLLECTION(), sin embargo, si queremos darle mas formato a nuestras colecciones debemos crear un recurso de coleccion.
+        // Verificamos que el usuario este autenticado (NO FUNCIONA):
+        // if(!auth() -> check())
+        // {
+        //     return response() -> json([
 
-        // return AppointmentResource::collection(Appointment::latest() -> paginate());
+        //         'error' => 'Unauthorized'
 
-        // Esta sentencia utiliza nuestro archivo COLLECTION para darle formato a la consulta del INDEX
+        //     ], 401);
+        // }
+
+        // Esta sentencia utiliza nuestro archivo AppointmentCollection para darle formato a la consulta del INDEX
         // es decir, que esta setencia aplica formato a la coleccion de recursos que mostraremos:
         
         return new AppointmentCollection(Appointment::latest() -> paginate(9));

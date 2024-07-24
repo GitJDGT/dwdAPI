@@ -29,14 +29,11 @@ Route::apiResource('v1/appointments', APC1::class)
 // protegido por SANCTUM ya que cualquier usuario invitado (Guest Session) debe poder visualizar el inicio de sesion (Log IN). Para esto invocamos el uso
 // de Tokens para las sesiones en nuestro MODELO de USUARIO.
 
-Route::post('login', [\App\Http\Controllers\Api\LoginController::class, 'login']);
+Route::post('login', [\App\Http\Controllers\Api\LoginController::class, 'login']) -> name('login');
 
-
-// Esta sera nuestra ruta de registro de usuarios.
-
-Route::post('register', [\App\Http\Controllers\Api\RegisterController::class, 'register']);
+Route::post('register', [\App\Http\Controllers\Api\RegisterController::class, 'register']) -> name('register');
 
 
 // Ruta para el cierre de sesion, esta si se encuentra protegida, puesto que solo los usuarios con una sesion valida deben poder visualizar esta ruta.
 
-Route::middleware('auth:sanctum') -> post ('logout', [\App\Http\Controllers\Api\LoginController::class, 'logout']);
+Route::middleware('auth:sanctum') -> post ('logout', [\App\Http\Controllers\Api\LoginController::class, 'logout']) -> name('logout');

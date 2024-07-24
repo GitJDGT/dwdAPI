@@ -19,7 +19,7 @@ class AppointmentCollection extends ResourceCollection
             'data' => $this -> collection,
             'meta' => 
             [
-                'author' => ['JDGT']
+                'author' => ['author']
             ],
             'type' => 'appointments'
         ];
