@@ -65,7 +65,7 @@ class AppointmentController extends Controller
 
         if($scheduledFor -> diffInMinutes($scheduledFor -> copy() -> addHour()) !== 60 )
         {
-            return response() -> json(['message' => 'La duracion de la cita debe ser de 1 hora.' ], 400);
+            return response() -> json(['message' => 'Appointment duration must be 1 hour.' ], 400);
         }
 
         // Validamos que la fecha corresponda a un dia de la semana (Lunes a Viernes) y que la hora corresponda a horario de oficina,
@@ -79,7 +79,7 @@ class AppointmentController extends Controller
                 // que si hay una cita programada para las 6 PM de hoy, esta reserva el tiempo desde las 6 PM hasta las 7 PM y ninguna otra cita debe poder
                 // registrarse en ese rango horario del mismo dia.
 
-                $endOfAppointment = $scheduledFor -> copy() -> addHour(); // NO FUNCIONA (La Validacion entera)
+                $endOfAppointment = $scheduledFor -> copy() -> addHour();
                 $beforeAppointment = $scheduledFor -> copy() -> subHour();
 
                 $existingAppointments = Appointment::where(function ($query) use ($scheduledFor, $endOfAppointment) 
@@ -94,7 +94,7 @@ class AppointmentController extends Controller
 
                 if ($existingAppointments) 
                 {
-                    return response()->json(['message' => 'Ya existe una cita programada en este rango horario.'], 400);
+                    return response()->json(['message' => 'An appointment is already scheduled for this range of hours.'], 400);
                 }
 
                 // Aqui creamos un SLUG para la cita ya que es requerido, usando la clase STR
@@ -106,21 +106,21 @@ class AppointmentController extends Controller
         
                 $request -> merge(['slug' => $slug]);
         
-                // Creamos la cita con los datos de la peticion. EL ALL SE PUEDE SUSTITUIR POR VALIDATED?
+                // Creamos la cita con los datos de la peticion. EL ALL SE PUEDE SUSTITUIR POR VALIDATED
         
                 $appointment = Appointment::create($request -> all());
         
-                return response() -> json(['message' => 'Cita creada exitosamente', 'Cita' => $appointment], 201);
+                return response() -> json(['message' => 'Appointment Created', 'Appointment' => $appointment], 201);
 
             }
             else
             {
-                return response() -> json(['message' => 'La cita debe programarse entre las 9 AM y las 6 PM'], 400);
+                return response() -> json(['message' => 'Appointments must be booked between 9 AM and 6 PM'], 400);
             }
         }
         else
         {
-            return response() -> json(['message' => 'La cita debe programarse en dias habiles (Lunes a Viernes).'], 400);
+            return response() -> json(['message' => 'Appointments must be booked on weekdays (Monday through Friday).'], 400);
         }
     }
 
@@ -159,7 +159,7 @@ class AppointmentController extends Controller
 
         if($scheduledFor -> diffInMinutes($scheduledFor -> copy() -> addHour()) !== 60 )
         {
-            return response() -> json(['message' => 'La duracion de la cita debe ser de 1 hora.' ], 400);
+            return response() -> json(['message' => 'Appointment duration must be 1 hour.' ], 400);
         }
 
         if($scheduledFor -> isWeekday())
@@ -168,7 +168,7 @@ class AppointmentController extends Controller
             {
                 // Validamos que el rango horario este libre.
 
-                $endOfAppointment = $scheduledFor -> copy() -> addHour(); // NO FUNCIONA (La Validacion entera)
+                $endOfAppointment = $scheduledFor -> copy() -> addHour();
                 $beforeAppointment = $scheduledFor -> copy() -> subHour();
 
                 $existingAppointments = Appointment::where(function ($query) use ($scheduledFor, $endOfAppointment) 
@@ -183,7 +183,7 @@ class AppointmentController extends Controller
 
                 if ($existingAppointments) 
                 {
-                    return response()->json(['message' => 'Ya existe una cita programada en este rango horario.'], 400);
+                    return response()->json(['message' => 'An appointment is already scheduled for this range of hours.'], 400);
                 }
 
                 // Aqui creamos un SLUG NUEVO para la cita, usando la clase STR
@@ -198,17 +198,17 @@ class AppointmentController extends Controller
         
                 $appointment -> update($request -> only(['user_id', 'title', 'scheduled_for', 'slug']));
         
-                return response() -> json($appointment, 200);
+                return response() -> json(['message' => 'Appointment updated', 'Appointment' => $appointment], 200);
 
             }
             else
             {
-                return response() -> json(['message' => 'La cita debe programarse entre las 9 AM y las 6 PM'], 400);
+                return response() -> json(['message' => 'Appointments must be booked between 9 AM and 6 PM'], 400);
             }
         }
         else
         {
-            return response() -> json(['message' => 'La cita debe programarse en dias habiles (Lunes a Viernes).'], 400);
+            return response() -> json(['message' => 'Appointments must be booked on weekdays (Monday through Friday).'], 400);
         }
 
     }
