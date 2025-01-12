@@ -12,6 +12,7 @@ use App\Http\Resources\V1\AppointmentCollection;
 use Illuminate\Support\Str;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
@@ -20,16 +21,6 @@ class AppointmentController extends Controller
      */
     public function index()
     {
-        // Verificamos que el usuario este autenticado (NO FUNCIONA):
-        // if(!auth() -> check())
-        // {
-        //     return response() -> json([
-
-        //         'error' => 'Unauthorized'
-
-        //     ], 401);
-        // }
-
         // Esta sentencia utiliza nuestro archivo AppointmentCollection para darle formato a la consulta del INDEX
         // es decir, que esta setencia aplica formato a la coleccion de recursos que mostraremos:
         

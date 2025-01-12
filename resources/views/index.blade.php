@@ -14,8 +14,8 @@
         {{-- SOBRE LA INFORMACION:
 
             Cada atributo que llamamos aqui en el FOREACH es un atributo intrinseco (Es un campo de la Base de Datos) o un atributo del modelo
-            ,el modelo basicamente es un aquetipo que utilizamos para crear cada una de las instancias de nuestro objeto, creo... entonces las factorys
-            utilizan la migracion y el modelo para crear los datos de prueba? 
+            ,el modelo basicamente es un aquetipo que utilizamos para crear cada una de las instancias de nuestro objeto, entonces las factorys
+            utilizan la migracion y el modelo para crear los datos de prueba.
 
             En laravel hay Mutators y Accessors, los Mutators cambian el valor antes de que sea almacenado en base de datos, con los Accessor te puedes hacer "campos virtuales" que 
             como tal no estan almacenados en base de datos, pero que son accesibles como si lo estuvieran, este que usas es un Accessor (published_at y scheduled) y 
