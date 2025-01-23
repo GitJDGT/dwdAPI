@@ -17,15 +17,18 @@ use Illuminate\Support\Facades\Auth;
 class AppointmentController extends Controller
 {
     /**
-     * En esta funcion retornamos una coleccion de recursos (Appointments).
+     * En esta funcion retornamos una coleccion de recursos (Appointments)
+     * filtrados por el identificador del usuario.
      */
     public function index()
     {
         // Esta sentencia utiliza nuestro archivo AppointmentCollection para darle formato a la consulta del INDEX
         // es decir, que esta setencia aplica formato a la coleccion de recursos que mostraremos:
-        
-        return new AppointmentCollection(Appointment::latest() -> paginate(9));
+            
+        return new AppointmentCollection(Appointment::query() -> where('user_id', Auth::user() -> id) -> latest() -> paginate(9));
 
+        // Si quisieramos mostrar todas las citas usariamos algo como: return new AppointmentCollection(Appointment::latest() -> paginate(9));
+            
         // La ruta para acceder a este metodo es GET => "api/v1/appointments".
     }
 
@@ -91,7 +94,7 @@ class AppointmentController extends Controller
                 // Aqui creamos un SLUG para la cita ya que es requerido, usando la clase STR
                 // ofrecida por Laravel.
         
-                $slug = Str::slug($request -> input('title'));
+                $slug = Str::slug($request -> input('title')).'-'.time();
         
                 // Asignamos el SLUG al campo que corresponde de la peticion.
         

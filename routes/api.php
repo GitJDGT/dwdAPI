@@ -21,7 +21,7 @@ use App\Http\Controllers\Api\V1\AppointmentController as APC1;
 // el software que intente acceder a la informacion tendra un error de tipo 500 (Error del servidor) porque intentara conectarse al Login y tal no existe.
 
 Route::apiResource('v1/appointments', APC1::class)
-//-> middleware('auth:sanctum')
+-> middleware('auth:sanctum')
 ;
 
 
@@ -32,6 +32,8 @@ Route::apiResource('v1/appointments', APC1::class)
 Route::post('login', [\App\Http\Controllers\Api\LoginController::class, 'login']) -> name('login');
 
 Route::post('register', [\App\Http\Controllers\Api\RegisterController::class, 'register']) -> name('register');
+
+Route::get('v1/guest', [\App\Http\Controllers\Api\V1\GuestController::class, 'guestIndex']) -> name('guest');
 
 
 // Ruta para el cierre de sesion, esta si se encuentra protegida, puesto que solo los usuarios con una sesion valida deben poder visualizar esta ruta.
