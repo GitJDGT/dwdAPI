@@ -36,7 +36,7 @@ class Appointment extends Model
      * @var array<int, string>
      */
 
-    // Aparentemente aqui se deben asignar los atributos del modelo que son asignables en un formulario o algo asi,
+    // Aqui se deben asignar los atributos del modelo que son asignables en un formulario o
     // de lo contrario la funcion de registrar no funcionara. En caso del SLUG que tambien es requerido segun la migracion
     // que creamos para nuestra tabla, ese no es rellenable, se generara de forma automatica antes de registrar una cita y
     // se asignara al campo que corresponde, vease en la funcion STORE.

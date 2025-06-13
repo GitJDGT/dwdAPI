@@ -28,7 +28,8 @@ class AppointmentResource extends JsonResource
             'author' => 
             [
                 'name' => $this -> user -> name,
-                'email' => $this -> user -> email
+                'email' => $this -> user -> email,
+                'user_id' => $this -> user -> id
             ]
         ];
     }
